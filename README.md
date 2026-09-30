@@ -1,13 +1,18 @@
 # React Crash Course
-https://www.youtube.com/watch?v=TMYSeKi_MnI
-https://coding2go.com/source-code
+YouTube: https://www.youtube.com/watch?v=TMYSeKi_MnI
+
+Webpage: https://coding2go.com/source-code
 
 Quick start:
+
 `npm create vite@latest .`
+
 `y`
 
 Note that:
+
 `<StrictMode>` in `main.jsx` component activats checks for development
+
 `main.jsx` is the main code entry point
 
 
