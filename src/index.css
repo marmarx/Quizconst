@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap');
 
 :root {
-  --page-bg-color: #3253b0;
-  --accent-color: #3253b0;
+  --page-bg-color: #5172ce;
+  --accent-color: #9b32b0;
   --text-color: #20202a;
   --primary-color: #f2f1ff;
   --secondary-color: #cdcddd;
@@ -31,9 +31,7 @@ h1 {
   font-size: 2.5rem;
 }
 
-button {
-  font: inherit;
-}
+button { font: inherit; }
 
 .app {
   min-height: 100vh;
@@ -56,9 +54,7 @@ main header {
   margin-bottom: 2rem;
 }
 
-header strong {
-  color: var(--accent-color);
-}
+header strong { color: var(--accent-color); }
 
 header .leftHeader {
   display: flex;
@@ -98,20 +94,31 @@ header .leftHeader {
 }
 
 .answers button, .result {
-  padding: 1rem;
-  color: var(--text-color);
   font-weight: 500;
-  background: var(--secondary-color);
+  padding: 1rem;
   border: none;
   border-radius: 0.75rem;
   cursor: pointer;
   transition: 0.2s ease;
 }
 
+.answers button {
+  --bg: var(--secondary-color);
+  --cl: var(--text-color);
+  background: var(--bg);
+  color: var(--cl);
+  
+  &:hover { 
+    --bg: oklch(from var(--accent-color) calc(1.1 * l) c h);
+    --cl: oklch(from var(--accent-color) clamp(0, calc((0.7 - l) * 1000), 1) 0 0);
+  }
+}
+
 .result {
   width: 100%;
   margin-top: 1.5rem;
-  background: oklch(from var(--secondary-color) calc(1.1*l) c h);
+  color: oklch(from var(--text-color) calc(1.75*l) c h);
+  background: oklch(from var(--secondary-color) calc(1.1 * l) c h);
 }
 
 .answer-btn:hover {
@@ -135,30 +142,27 @@ header .leftHeader {
 }
 
 @media (width < 600px) {
-  .app {
-    padding: 1rem;
-  }
-
-  main {
-    padding: 1.5rem;
-  }
+  .app { padding: 1rem }
+  main { padding: 1.5rem }
 
   main header {
     align-items: flex-start;
     flex-direction: column;
+    gap: 0;
   }
 
-  .scoreboard {
+  header .leftHeader {
     width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    & > span:nth-child(1) { font-size: inherit }
   }
 
-  .score-box {
-    flex: 1;
-  }
-
-  .answers {
-    grid-template-columns: 1fr;
-  }
+  .scoreboard { width: 100% }
+  .score-box { flex: 1 }
+  .answers { grid-template-columns: 1fr }
 }
 
 .answers button {
@@ -194,45 +198,21 @@ header .leftHeader {
   animation: answer-message 0.3s ease forwards;
 }
 
-.answers button.correct::before {
-  content: 'Correct!';
-  background: #219653;
-}
+.answers button.correct::before   { content: 'Correct!';   background: #219653; }
+.answers button.incorrect::before { content: 'Incorrect!'; background: #d63031; }
 
-.answers button.incorrect::before {
-  content: 'Incorrect!';
-  background: #d63031;
-}
-
-.answers button:disabled {
-  cursor: default;
-}
+.answers button:disabled { cursor: default }
 
 @keyframes correct-answer {
-  50% {
-    transform: scale(1.06);
-  }
+  50% { transform: scale(1.06) }
 }
 
 @keyframes incorrect-answer {
-  25%,
-  75% {
-    transform: translateX(-6px);
-  }
-
-  50% {
-    transform: translateX(6px);
-  }
+  25%, 75% { transform: translateX(-6px) }
+  50% { transform: translateX(6px) }
 }
 
 @keyframes answer-message {
-  from {
-    opacity: 0;
-    transform: translateY(-20%) scale(0.8);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(-50%) scale(1);
-  }
+  from { opacity: 0; transform: translateY(-20%) scale(0.8) }
+  to   { opacity: 1; transform: translateY(-50%) scale(1)   }
 }
