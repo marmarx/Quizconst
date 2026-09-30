@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap');
+
+:root {
+  --page-bg-color: #3253b0;
+  --accent-color: #3253b0;
+  --text-color: #20202a;
+  --primary-color: #f2f1ff;
+  --secondary-color: #cdcddd;
+  --secondary-text-color: #84809b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100svh;
+  background-color: var(--page-bg-color);
+  color: var(--text-color);
+  font-family: 'Google Sans Flex', sans-serif;
+  display: grid;
+  place-content: center;
+}
+
+h1 {
+  margin-right: auto;
+  color: var(--accent-color);
+  letter-spacing: -0.015em;
+  font-size: 2.5rem;
+}
+
+button {
+  font: inherit;
+}
+
+.app {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+}
+
+main {
+  padding: 2.5rem;
+  background: var(--primary-color);
+  border-radius: 1.25rem;
+}
+
+main header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+header strong {
+  color: var(--accent-color);
+}
+
+header .leftHeader {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+
+  & > span:nth-child(1) { opacity: 0.7; font-size: 0.8em; }
+}
+
+.flashcard {
+  min-height: 220px;
+  display: grid;
+  place-content: center;
+  padding: 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, var(--accent-color), var(--page-bg-color));
+  border-radius: 1rem;
+}
+
+.flashcard p {
+  margin-bottom: 0.75rem;
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+}
+
+.flashcard h2 {
+  color: var(--primary-color);
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  word-break: break-word;
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.answers button, .result {
+  padding: 1rem;
+  color: var(--text-color);
+  font-weight: 500;
+  background: var(--secondary-color);
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.result {
+  width: 100%;
+  margin-top: 1.5rem;
+  background: oklch(from var(--secondary-color) calc(1.1*l) c h);
+}
+
+.answer-btn:hover {
+  color: var(--accent-color);
+  background: var(--secondary-color);
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.answer-btn:focus-visible {
+  outline: 3px solid var(--accent-color);
+  outline-offset: 3px;
+}
+
+.game-hint {
+  line-height: 1.6;
+  margin-top: 1.5rem;
+  color: var(--secondary-text-color);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+@media (width < 600px) {
+  .app {
+    padding: 1rem;
+  }
+
+  main {
+    padding: 1.5rem;
+  }
+
+  main header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .scoreboard {
+    width: 100%;
+  }
+
+  .score-box {
+    flex: 1;
+  }
+
+  .answers {
+    grid-template-columns: 1fr;
+  }
+}
+
+.answers button {
+  position: relative;
+  overflow: visible;
+}
+
+.answers button.correct {
+  color: white;
+  background: #2ecc71;
+  border-color: #2ecc71;
+  animation: correct-answer 0.5s ease;
+}
+
+.answers button.incorrect {
+  color: white;
+  background: #ff5252;
+  border-color: #ff5252;
+  animation: incorrect-answer 0.4s ease;
+}
+
+.answers button.correct::before,
+.answers button.incorrect::before {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 1rem;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  pointer-events: none;
+  animation: answer-message 0.3s ease forwards;
+}
+
+.answers button.correct::before {
+  content: 'Correct!';
+  background: #219653;
+}
+
+.answers button.incorrect::before {
+  content: 'Incorrect!';
+  background: #d63031;
+}
+
+.answers button:disabled {
+  cursor: default;
+}
+
+@keyframes correct-answer {
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes incorrect-answer {
+  25%,
+  75% {
+    transform: translateX(-6px);
+  }
+
+  50% {
+    transform: translateX(6px);
+  }
+}
+
+@keyframes answer-message {
+  from {
+    opacity: 0;
+    transform: translateY(-20%) scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+}
