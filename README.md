@@ -1,3 +1,16 @@
+# React Crash Course
+https://www.youtube.com/watch?v=TMYSeKi_MnI
+https://coding2go.com/source-code
+
+Quick start:
+`npm create vite@latest .`
+`y`
+
+Note that:
+`<StrictMode>` in `main.jsx` component activats checks for development
+`main.jsx` is the main code entry point
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
