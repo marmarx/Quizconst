@@ -3,13 +3,13 @@ YouTube: https://www.youtube.com/watch?v=TMYSeKi_MnI
 
 Webpage: https://coding2go.com/source-code
 
-Quick start:
+**Quick start:**
 
 `npm create vite@latest .`
 
 `y`
 
-Note that:
+**Note that:**
 
 `<StrictMode>` in `main.jsx` component activats checks for development
 
